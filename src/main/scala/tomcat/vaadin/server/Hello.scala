@@ -16,23 +16,11 @@ object Hello {
 	def main(args:Array[String]):Unit = {
 		val tom = new Tomcat()
 			tom.setPort(8080)
-			val ctx = tom.addContext("/",new File(".").
+			val ctx = tom.addContext("/",new File("src/main/webapp/").
 					getAbsolutePath())
 
-			Tomcat.addServlet(ctx, "hello", new HttpServlet() {
-					@throws[Exception]
-					override def service(req:HttpServletRequest,
-							resp:HttpServletResponse) = {
-					val w = resp.getWriter()
-					w.write("Hello World")
-					w.flush()
-					}})
-			
 			Tomcat.addServlet(ctx, "vaadin", HelloServlet)
-		
-		ctx.addServletMapping("/*", "hello")
-		ctx.addServletMapping("/vaadin/*", "vaadin")
-		ctx.addServletMapping("/VAADIN/*", "vaadin")
+		ctx.addServletMapping("/*", "vaadin")
 		tom.start()
 		tom.getServer().await()
 
@@ -40,8 +28,7 @@ object Hello {
 }
 
 
-
-@Theme("valo")
+@Theme("mytheme")
 class VaadinUI extends UI {
 	override def init(vr:VaadinRequest):Unit = {
 		val layout = new VerticalLayout()
@@ -55,6 +42,6 @@ class VaadinUI extends UI {
 	}
 }
 
-@VaadinServletConfiguration(ui = classOf[VaadinUI] , productionMode = true)
+@VaadinServletConfiguration(ui = classOf[VaadinUI] , productionMode = false)
 object HelloServlet extends VaadinServlet
 

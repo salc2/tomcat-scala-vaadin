@@ -20,3 +20,23 @@ dependencies{
 repositories {
     mavenCentral()
 }
+
+import com.vaadin.sass.SassCompiler
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'com.vaadin', name: 'vaadin-client-compiler', version: '7.5.6'
+        classpath group: 'com.vaadin', name: 'vaadin-client-compiled', version: '7.5.6'
+        classpath group: 'com.vaadin', name: 'vaadin-themes', version: '7.5.6'
+    }
+}
+
+task compilesass << {
+	sass = new File("src/main/webapp/VAADIN/themes/mytheme/styles.scss").getAbsolutePath() 
+	css = new File("src/main/webapp/VAADIN/themes/mytheme/styles.css").getAbsolutePath() 
+	def String[] args = [sass,css]
+	com.vaadin.sass.SassCompiler.main(args)
+}

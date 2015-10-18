@@ -1,0 +1,9 @@
+
+$v-background-color: #7e7e7e;
+@import "../valo/valo.scss";
+
+@mixin mytheme {
+	@include valo;
+
+	/* An actual theme rule */
+}

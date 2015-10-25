@@ -35,8 +35,8 @@ buildscript {
 }
 
 task compilesass << {
-	sass = new File("src/main/webapp/VAADIN/themes/mytheme/styles.scss").getAbsolutePath() 
-	css = new File("src/main/webapp/VAADIN/themes/mytheme/styles.css").getAbsolutePath() 
+	sass = new File("src/main/resources/VAADIN/themes/mytheme/styles.scss").getAbsolutePath() 
+	css = new File("src/main/resources/VAADIN/themes/mytheme/styles.css").getAbsolutePath() 
 	def String[] args = [sass,css]
 	com.vaadin.sass.SassCompiler.main(args)
 }

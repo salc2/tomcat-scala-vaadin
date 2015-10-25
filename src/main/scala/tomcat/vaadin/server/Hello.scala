@@ -16,7 +16,7 @@ object Hello {
 	def main(args:Array[String]):Unit = {
 		val tom = new Tomcat()
 			tom.setPort(8080)
-			val ctx = tom.addContext("/",new File("src/main/webapp/").
+			val ctx = tom.addContext("/",new File(".").
 					getAbsolutePath())
 
 			Tomcat.addServlet(ctx, "vaadin", HelloServlet)
@@ -32,16 +32,20 @@ object Hello {
 class VaadinUI extends UI {
 	override def init(vr:VaadinRequest):Unit = {
 		val layout = new VerticalLayout()
+		val text = new TextField("Name")
 		layout.setMargin(true)
+		layout.setSpacing(true)
 		setContent(layout)
 		val button = new Button("Click me", new Button.ClickListener(){
 			override def buttonClick(event:ClickEvent):Unit = 
-			layout.addComponent(new Label("Fucking Awesome!!"))
+			layout.addComponent(new Label(text.getValue))
 		})
+		
+		layout.addComponent(text)
 		layout.addComponent(button)
 	}
 }
 
-@VaadinServletConfiguration(ui = classOf[VaadinUI] , productionMode = false)
+@VaadinServletConfiguration(ui = classOf[VaadinUI] , productionMode = true)
 object HelloServlet extends VaadinServlet
 

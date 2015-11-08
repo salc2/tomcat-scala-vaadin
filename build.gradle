@@ -39,4 +39,5 @@ task compilesass << {
 	css = new File("src/main/resources/VAADIN/themes/mytheme/styles.css").getAbsolutePath() 
 	def String[] args = [sass,css]
 	com.vaadin.sass.SassCompiler.main(args)
+	print "sass compiled!"
 }
